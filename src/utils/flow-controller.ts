@@ -112,10 +112,8 @@ export default class FlowController {
       return
     }
 
-    const [lines, height] = this.getLinesAndHeight(
-      video.offsetHeight,
-      this.settings
-    )
+    const videoHeight = video.offsetHeight
+    const [lines, height] = this.getLinesAndHeight(videoHeight, this.settings)
 
     const deleted = await this.validateDeletedMessage(element)
     if (deleted) {
@@ -136,7 +134,7 @@ export default class FlowController {
       return
     }
 
-    me.style.display = 'none'
+    me.style.visibility = 'hidden'
     container.appendChild(me)
     await waitAllImagesLoaded(me)
 
@@ -146,11 +144,15 @@ export default class FlowController {
         return
       }
 
-      me.style.display = 'flex'
-
-      const messageRows = Math.ceil(me.offsetHeight / Math.ceil(height))
+      const messageHeight = me.offsetHeight
+      const messageWidth = me.offsetWidth
+      const messageRows = Math.ceil(messageHeight / Math.ceil(height))
       const containerWidth = container.offsetWidth
-      const timeline = this.createTimeline(me, containerWidth, this.settings)
+      const timeline = this.createTimeline(
+        messageWidth,
+        containerWidth,
+        this.settings
+      )
 
       const index = this.getIndex(lines, messageRows, timeline)
       if (index + messageRows > lines && this.settings.overflow === 'hidden') {
@@ -164,14 +166,20 @@ export default class FlowController {
       const opacity = this.settings.opacity ** (z + 1)
       const top =
         this.settings.stackDirection === 'bottom_to_top'
-          ? video.offsetHeight - height * (y + messageRows + 0.1)
+          ? videoHeight - height * (y + messageRows + 0.1)
           : height * (y + 0.1)
 
       me.style.top = `${top}px`
       me.style.opacity = String(opacity)
       me.style.zIndex = String(z + 1 + 11) // 11 is set to z-index on div.webgl
+      me.style.visibility = 'visible'
 
-      const animation = this.createAnimation(me, containerWidth, this.settings)
+      const animation = this.createAnimation(
+        me,
+        messageWidth,
+        containerWidth,
+        this.settings
+      )
       animation.onfinish = () => {
         me.remove()
       }
@@ -246,13 +254,13 @@ export default class FlowController {
   }
 
   private createTimeline(
-    element: HTMLElement,
+    elementWidth: number,
     containerWidth: number,
     settings: Settings
   ) {
     const displayMillis = settings.displayTime * 1000
     const delayMillis = settings.delayTime * 1000
-    const w = element.offsetWidth
+    const w = elementWidth
     const v = (containerWidth + w) / displayMillis
     const t = w / v
     const n = Date.now()
@@ -267,6 +275,7 @@ export default class FlowController {
 
   private createAnimation(
     element: HTMLElement,
+    elementWidth: number,
     containerWidth: number,
     settings: Settings
   ) {
@@ -276,7 +285,7 @@ export default class FlowController {
     const delay = settings.delayTime * 1000
     const keyframes = [
       { transform: `translate(${containerWidth}px, 0px)` },
-      { transform: `translate(-${element.offsetWidth}px, 0px)` },
+      { transform: `translate(-${elementWidth}px, 0px)` },
     ]
     const animation = element.animate(keyframes, { duration, delay })
     animation.pause()
