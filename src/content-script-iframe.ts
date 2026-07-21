@@ -82,6 +82,7 @@ const positionControlButtonTooltip = (button: HTMLElement) => {
   }
 
   tooltip.style.display = 'block'
+  tooltip.removeAttribute('aria-hidden')
 
   const buttonRect = button.getBoundingClientRect()
   const playerRect = player.getBoundingClientRect()
@@ -112,6 +113,7 @@ const showControlButtonTooltip = (button: HTMLElement) => {
 
 const hideControlButtonTooltip = () => {
   if (controlButtonTooltip) {
+    controlButtonTooltip.setAttribute('aria-hidden', 'true')
     controlButtonTooltip.style.display = 'none'
   }
 }
