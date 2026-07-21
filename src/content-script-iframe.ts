@@ -99,7 +99,7 @@ const positionControlButtonTooltip = (button: HTMLElement) => {
     maxLeft
   )
   const top = Math.max(
-    buttonRect.top - playerRect.top - tooltipRect.height - 8,
+    buttonRect.top - playerRect.top - tooltipRect.height - 12,
     0
   )
 
