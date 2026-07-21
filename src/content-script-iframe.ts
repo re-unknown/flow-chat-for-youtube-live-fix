@@ -51,7 +51,9 @@ const addControlButton = () => {
 
   const button = document.createElement('button')
   button.classList.add('ytp-button', 'ylcf-control-button')
-  button.title = 'Flow messages'
+  button.setAttribute('aria-label', 'Flow messages')
+  button.setAttribute('data-title-no-tooltip', 'Flow messages')
+  button.setAttribute('data-tooltip-title', 'Flow messages')
   button.onclick = async () =>
     await chrome.runtime.sendMessage({ type: 'control-button-clicked' })
   button.innerHTML = chat
