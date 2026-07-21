@@ -1,5 +1,7 @@
 # Flow Chat for YouTube Live Fix
 
+[日本語版 README](README.ja.md)
+
 This repository is a fork of
 [subdiox/youtube-live-chat-flow](https://github.com/subdiox/youtube-live-chat-flow).
 It is published as **Flow Chat for YouTube Live Fix**.
