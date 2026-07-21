@@ -12,7 +12,6 @@ module.exports = {
     'content-script': './content-script',
     'content-script-iframe': './content-script-iframe',
     options: './options',
-    popup: './popup',
   },
   output: {
     path: `${__dirname}/app/`,
@@ -90,7 +89,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './popup.html',
       filename: './popup.html',
-      chunks: ['popup'],
+      chunks: ['options'],
     }),
     new VueLoaderPlugin(),
     new VuetifyLoaderPlugin(),
