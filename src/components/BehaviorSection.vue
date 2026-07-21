@@ -1,5 +1,14 @@
 <template>
   <div class="behavior-section">
+    <v-switch
+      v-model="lowPowerMode"
+      class="mt-0 pt-0"
+      :label="t('lowPowerMode')"
+      :hint="t('lowPowerModeHint')"
+      persistent-hint
+      dense
+    />
+
     <div class="caption">{{ t('displayTime') }}</div>
     <v-slider
       v-model="displayTime"
@@ -134,6 +143,16 @@ const overflows = [
   { text: t('overflowOverlay'), value: 'overlay' },
 ]
 
+const lowPowerMode = computed({
+  get: () => {
+    return settingsStore.lowPowerMode
+  },
+  set: (value) => {
+    settingsStore.setLowPowerMode({
+      lowPowerMode: value,
+    })
+  },
+})
 const delayTime = computed({
   get: () => {
     return settingsStore.delayTime

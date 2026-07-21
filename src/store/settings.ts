@@ -20,6 +20,7 @@ const initialState: Settings = {
   extendedStyle: '',
   heightType: 'flexible',
   lineHeight: 64,
+  lowPowerMode: false,
   lines: 12,
   maxDisplays: 0,
   maxLines: 0,
@@ -78,6 +79,7 @@ export default class SettingsModule extends VuexModule {
   extendedStyle = initialState.extendedStyle
   heightType = initialState.heightType
   lineHeight = initialState.lineHeight
+  lowPowerMode = initialState.lowPowerMode
   lines = initialState.lines
   maxDisplays = initialState.maxDisplays
   maxLines = initialState.maxLines
@@ -147,6 +149,10 @@ export default class SettingsModule extends VuexModule {
   @Mutation
   setLineHeight({ lineHeight }: { lineHeight: number }) {
     this.lineHeight = lineHeight
+  }
+  @Mutation
+  setLowPowerMode({ lowPowerMode }: { lowPowerMode: boolean }) {
+    this.lowPowerMode = lowPowerMode
   }
   @Mutation
   setLines({ lines }: { lines: number }) {

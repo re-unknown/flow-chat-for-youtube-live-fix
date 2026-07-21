@@ -316,21 +316,28 @@ type Params = {
   fontStyle?: string
   backgroundColor?: string
   height: number
+  lowPowerMode?: boolean
   width: number
   outlineRatio: number
   emojiStyle: EmojiStyle
 }
 
 export const render = (template: Template, params: Params) => {
+  const lowPowerMode = params.lowPowerMode === true
+  const outlineRatio = lowPowerMode ? 0 : params.outlineRatio
   const newParams = {
     ...params,
+    avatarUrl: lowPowerMode ? undefined : params.avatarUrl,
+    backgroundColor: lowPowerMode ? undefined : params.backgroundColor,
+    emojiStyle: (lowPowerMode ? 'text' : params.emojiStyle) as EmojiStyle,
     fontStyle:
-      params.fontStyle +
+      (lowPowerMode ? '' : (params.fontStyle ?? '')) +
       getOutlineStyle(
         params.fontColor ?? 'white',
         params.height,
-        params.outlineRatio
+        outlineRatio
       ),
+    stickerUrl: lowPowerMode ? undefined : params.stickerUrl,
   }
   switch (template) {
     case 'one-line-message':

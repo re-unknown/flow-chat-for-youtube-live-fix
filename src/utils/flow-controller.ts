@@ -30,6 +30,9 @@ class Limiter {
   }
 
   isOver() {
+    if (this.limits <= 0) {
+      return false
+    }
     const now = Date.now()
     if (now > this.expireTime) {
       this.count = 0
@@ -90,7 +93,14 @@ export default class FlowController {
 
   set settings(value: Settings | undefined) {
     this._settings = value
-    this.limiter = new Limiter(value?.maxDisplays ?? 0)
+    this.limiter = new Limiter(this.getMaxDisplays(value))
+  }
+
+  private getMaxDisplays(settings: Settings | undefined) {
+    if (!settings?.lowPowerMode) {
+      return settings?.maxDisplays ?? 0
+    }
+    return settings.maxDisplays > 0 ? Math.min(settings.maxDisplays, 8) : 8
   }
 
   private async proceed(element: HTMLElement) {
@@ -125,7 +135,7 @@ export default class FlowController {
       return
     }
 
-    if (this.settings.maxDisplays > 0 && this.limiter?.isOver()) {
+    if (this.limiter?.isOver()) {
       return
     }
 
@@ -239,6 +249,7 @@ export default class FlowController {
       fontStyle: ms.fontStyle,
       backgroundColor: ms.backgroundColor,
       height,
+      lowPowerMode: settings.lowPowerMode,
       width: settings.maxWidth,
       outlineRatio: settings.outlineRatio,
       emojiStyle: settings.emojiStyle,

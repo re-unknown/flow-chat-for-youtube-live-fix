@@ -28,6 +28,7 @@ export type Settings = {
   extendedStyle: string
   heightType: HeightType
   lineHeight: number
+  lowPowerMode: boolean
   lines: number
   maxDisplays: number
   maxLines: number

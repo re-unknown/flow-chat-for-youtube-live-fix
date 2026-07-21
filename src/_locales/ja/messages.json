@@ -101,6 +101,12 @@
   "emojiNone": {
     "message": "なし"
   },
+  "lowPowerMode": {
+    "message": "軽量モード"
+  },
+  "lowPowerModeHint": {
+    "message": "エフェクト、画像、背景、表示集中を簡素化してレンダリング負荷を下げます。"
+  },
   "displayTime": {
     "message": "表示時間"
   },

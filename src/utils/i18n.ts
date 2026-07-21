@@ -31,6 +31,9 @@ const fallbackMessages: Record<string, string> = {
   emojiImage: 'Image',
   emojiAlternativeText: 'Alternative Text',
   emojiNone: 'None',
+  lowPowerMode: 'Low Power Mode',
+  lowPowerModeHint:
+    'Reduces rendering load by simplifying effects, images, backgrounds, and bursts.',
   displayTime: 'Display Time',
   delayTime: 'Delay Time',
   maxLines: 'Max Lines',
