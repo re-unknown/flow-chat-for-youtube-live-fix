@@ -3,8 +3,8 @@
     <v-switch
       v-model="chatVisible"
       class="mt-0 pt-0"
-      label="Always Show Chat"
-      hint="By default, the chat is hidden for YouTube Premieres."
+      :label="t('alwaysShowChat')"
+      :hint="t('alwaysShowChatHint')"
       persistent-hint
       dense
     />
@@ -14,6 +14,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { settingsStore } from '~/store'
+import { t } from '~/utils/i18n'
 
 const chatVisible = computed({
   get: () => {

@@ -1,4 +1,11 @@
-# Flow Chat for YouTube Live
+# Flow Chat for YouTube Live Fix
+
+This repository is a fork of
+[subdiox/youtube-live-chat-flow](https://github.com/subdiox/youtube-live-chat-flow).
+It is published as **Flow Chat for YouTube Live Fix**.
+
+The original MIT License and copyright notice are retained in
+[LICENSE](LICENSE).
 
 > Chrome Extension for Flow Chat Messages on YouTube Live.
 

@@ -38,9 +38,13 @@ const removeControlButton = () => {
 const addControlButton = () => {
   removeControlButton()
 
-  const controls = parent.document.querySelector(
-    '.ytp-chrome-bottom .ytp-chrome-controls .ytp-right-controls'
-  )
+  const controls =
+    parent.document.querySelector(
+      '.ytp-chrome-bottom .ytp-chrome-controls .ytp-right-controls-left'
+    ) ??
+    parent.document.querySelector(
+      '.ytp-chrome-bottom .ytp-chrome-controls .ytp-right-controls'
+    )
   if (!controls) {
     return
   }
@@ -52,12 +56,12 @@ const addControlButton = () => {
     await chrome.runtime.sendMessage({ type: 'control-button-clicked' })
   button.innerHTML = chat
 
-  // Change SVG viewBox
+  // Match YouTube player button icon sizing.
   const svg = button.querySelector('svg')
   if (svg) {
-    svg.setAttribute('viewBox', '-8 -8 40 40')
-    svg.setAttribute('height', '100%')
-    svg.setAttribute('width', '100%')
+    svg.setAttribute('viewBox', '0 0 24 24')
+    svg.setAttribute('height', '24')
+    svg.setAttribute('width', '24')
   }
 
   controls.prepend(button)

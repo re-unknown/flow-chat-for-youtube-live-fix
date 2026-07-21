@@ -6,7 +6,7 @@
       class="d-flex align-center"
     >
       <div class="caption text-capitalize" style="width: 100px">
-        {{ authorType }}
+        {{ getAuthorTitle(authorType) }}
       </div>
       <v-btn
         slot="activator"
@@ -71,14 +71,28 @@
 <script setup lang="ts">
 import { AuthorType, MessageType, Template } from '~/models'
 import { settingsStore } from '~/store'
+import { t } from '~/utils/i18n'
 
 const authorTypes = ['guest', 'member', 'moderator', 'owner', 'you']
 const messageTypes = ['super-chat', 'super-sticker', 'membership']
 const templates = [
-  { text: '1 line (without Author)', value: 'one-line-without-author' },
-  { text: '1 line (with Author)', value: 'one-line-with-author' },
-  { text: '2 lines', value: 'two-line' },
+  { text: t('templateOneLineWithoutAuthor'), value: 'one-line-without-author' },
+  { text: t('templateOneLineWithAuthor'), value: 'one-line-with-author' },
+  { text: t('templateTwoLine'), value: 'two-line' },
 ]
+
+const authorTitles: Record<string, string> = {
+  guest: t('authorGuest'),
+  member: t('authorMember'),
+  moderator: t('authorModerator'),
+  owner: t('authorOwner'),
+  you: t('authorYou'),
+}
+const messageTitles: Record<string, string> = {
+  'super-chat': t('messageSuperChat'),
+  'super-sticker': t('messageSuperSticker'),
+  membership: t('messageMembership'),
+}
 
 const getColor = (authorType: AuthorType) => {
   return settingsStore.styles[authorType].color
@@ -98,8 +112,11 @@ const isVisible = (type: AuthorType | MessageType) => {
 const isAvatar = (authorType: AuthorType) => {
   return settingsStore.styles[authorType].avatar
 }
+const getAuthorTitle = (authorType: AuthorType) => {
+  return authorTitles[authorType] ?? authorType
+}
 const getTitle = (messageType: MessageType) => {
-  return messageType.replace('-', ' ')
+  return messageTitles[messageType] ?? messageType
 }
 
 const handleClickVisibility = (type: AuthorType | MessageType) => {

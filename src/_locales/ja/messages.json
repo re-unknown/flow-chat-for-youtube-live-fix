@@ -1,0 +1,146 @@
+{
+  "extName": {
+    "message": "Flow Chat for YouTube Live Fix"
+  },
+  "extDescription": {
+    "message": "YouTube Live のチャットを動画上に流す Chrome 拡張機能です。"
+  },
+  "settingsGeneral": {
+    "message": "一般"
+  },
+  "settingsAppearance": {
+    "message": "表示"
+  },
+  "settingsBehavior": {
+    "message": "動作"
+  },
+  "settingsFilter": {
+    "message": "フィルター"
+  },
+  "settingsOthers": {
+    "message": "その他"
+  },
+  "resetSettings": {
+    "message": "設定をデフォルトに戻す"
+  },
+  "authorGuest": {
+    "message": "ゲスト"
+  },
+  "authorMember": {
+    "message": "メンバー"
+  },
+  "authorModerator": {
+    "message": "モデレーター"
+  },
+  "authorOwner": {
+    "message": "配信者"
+  },
+  "authorYou": {
+    "message": "自分"
+  },
+  "messageSuperChat": {
+    "message": "スーパーチャット"
+  },
+  "messageSuperSticker": {
+    "message": "スーパー ステッカー"
+  },
+  "messageMembership": {
+    "message": "メンバーシップ"
+  },
+  "templateOneLineWithoutAuthor": {
+    "message": "1行（投稿者なし）"
+  },
+  "templateOneLineWithAuthor": {
+    "message": "1行（投稿者あり）"
+  },
+  "templateTwoLine": {
+    "message": "2行"
+  },
+  "height": {
+    "message": "高さ"
+  },
+  "lineHeight": {
+    "message": "行の高さ"
+  },
+  "lines": {
+    "message": "行数"
+  },
+  "maxWidth": {
+    "message": "最大幅（0で無制限）"
+  },
+  "opacity": {
+    "message": "不透明度"
+  },
+  "showBackground": {
+    "message": "背景を表示（有料メッセージ以外）"
+  },
+  "backgroundOpacity": {
+    "message": "背景の不透明度"
+  },
+  "outlineRatio": {
+    "message": "縁取り比率"
+  },
+  "emojiStyle": {
+    "message": "絵文字表示"
+  },
+  "extendedStyle": {
+    "message": "拡張スタイル"
+  },
+  "heightFlexible": {
+    "message": "可変"
+  },
+  "heightFixed": {
+    "message": "固定"
+  },
+  "emojiImage": {
+    "message": "画像"
+  },
+  "emojiAlternativeText": {
+    "message": "代替テキスト"
+  },
+  "emojiNone": {
+    "message": "なし"
+  },
+  "displayTime": {
+    "message": "表示時間"
+  },
+  "delayTime": {
+    "message": "遅延時間"
+  },
+  "maxLines": {
+    "message": "最大行数"
+  },
+  "maxDisplays": {
+    "message": "1秒あたりの最大表示数（0で無制限）"
+  },
+  "stackDirections": {
+    "message": "積み上げ方向"
+  },
+  "overflowMode": {
+    "message": "はみ出し時の動作"
+  },
+  "stackTopToBottom": {
+    "message": "上から下"
+  },
+  "stackBottomToTop": {
+    "message": "下から上"
+  },
+  "overflowHidden": {
+    "message": "非表示"
+  },
+  "overflowOverlay": {
+    "message": "重ねて表示"
+  },
+  "filterMessagesBy": {
+    "message": "メッセージのフィルター:"
+  },
+  "alwaysShowChat": {
+    "message": "常にチャットを表示"
+  },
+  "alwaysShowChatHint": {
+    "message": "YouTube プレミア公開では、デフォルトでチャットが非表示になる場合があります。"
+  },
+  "unitSeconds": {
+    "message": "秒"
+  }
+}

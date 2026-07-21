@@ -68,13 +68,12 @@ module.exports = {
             return Buffer.from(
               JSON.stringify({
                 ...JSON.parse(content.toString()),
-                name: process.env.npm_package_productName,
-                description: process.env.npm_package_description,
                 version: process.env.npm_package_version,
               })
             )
           },
         },
+        '_locales',
         'content-script.css',
         'content-script-iframe.css',
       ],
