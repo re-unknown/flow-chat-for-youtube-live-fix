@@ -73,7 +73,11 @@ module.exports = {
             )
           },
         },
-        '_locales',
+        {
+          from: '_locales',
+          to: '_locales',
+          force: true,
+        },
         'content-script.css',
         'content-script-iframe.css',
       ],
