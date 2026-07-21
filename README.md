@@ -9,6 +9,12 @@ The original MIT License and copyright notice are retained in
 
 > Chrome Extension for Flow Chat Messages on YouTube Live.
 
+## Changes in This Fork
+
+- Fixed the Flow Chat player button layout for the current YouTube player controls.
+- Added rendering optimizations and a Low Power Mode to reduce GPU/rendering load.
+- Added provisional English and Japanese localization for extension settings.
+
 ## Features
 
 - Flow messages over the video.
