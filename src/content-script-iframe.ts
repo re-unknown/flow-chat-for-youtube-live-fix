@@ -6,6 +6,9 @@ import { querySelectorAsync } from '~/utils/dom-helper'
 
 const controller = new FlowController()
 let observer: MutationObserver | undefined
+let controlButtonTooltip: HTMLElement | undefined
+
+const controlButtonTooltipText = 'Flow messages'
 
 const menuButtonConfigs = [
   {
@@ -30,9 +33,98 @@ const updateControlButton = () => {
   button && button.setAttribute('aria-pressed', String(controller.enabled))
 }
 
+const getControlButtonTooltip = () => {
+  if (controlButtonTooltip) {
+    return controlButtonTooltip
+  }
+
+  const player = parent.document.querySelector<HTMLElement>(
+    '.html5-video-player'
+  )
+  if (!player) {
+    return
+  }
+
+  const tooltip = parent.document.createElement('div')
+  tooltip.classList.add('ytp-tooltip', 'ytp-bottom', 'ylcf-control-tooltip')
+  tooltip.setAttribute('aria-hidden', 'true')
+  tooltip.style.display = 'none'
+  tooltip.style.maxWidth = '300px'
+  tooltip.style.pointerEvents = 'none'
+
+  const textWrapper = parent.document.createElement('div')
+  textWrapper.classList.add('ytp-tooltip-text-wrapper')
+  textWrapper.setAttribute('aria-hidden', 'true')
+
+  const bottomText = parent.document.createElement('div')
+  bottomText.classList.add('ytp-tooltip-bottom-text')
+
+  const text = parent.document.createElement('span')
+  text.classList.add('ytp-tooltip-text')
+  text.textContent = controlButtonTooltipText
+
+  bottomText.append(text)
+  textWrapper.append(bottomText)
+  tooltip.append(textWrapper)
+
+  player.append(tooltip)
+  controlButtonTooltip = tooltip
+  return tooltip
+}
+
+const positionControlButtonTooltip = (button: HTMLElement) => {
+  const tooltip = getControlButtonTooltip()
+  const player = parent.document.querySelector<HTMLElement>(
+    '.html5-video-player'
+  )
+  if (!tooltip || !player) {
+    return
+  }
+
+  tooltip.style.display = 'block'
+
+  const buttonRect = button.getBoundingClientRect()
+  const playerRect = player.getBoundingClientRect()
+  const tooltipRect = tooltip.getBoundingClientRect()
+  const maxLeft = Math.max(playerRect.width - tooltipRect.width, 0)
+  const left = Math.min(
+    Math.max(
+      buttonRect.left -
+        playerRect.left +
+        buttonRect.width / 2 -
+        tooltipRect.width / 2,
+      0
+    ),
+    maxLeft
+  )
+  const top = Math.max(
+    buttonRect.top - playerRect.top - tooltipRect.height - 8,
+    0
+  )
+
+  tooltip.style.left = `${left}px`
+  tooltip.style.top = `${top}px`
+}
+
+const showControlButtonTooltip = (button: HTMLElement) => {
+  positionControlButtonTooltip(button)
+}
+
+const hideControlButtonTooltip = () => {
+  if (controlButtonTooltip) {
+    controlButtonTooltip.style.display = 'none'
+  }
+}
+
+const removeControlButtonTooltip = () => {
+  controlButtonTooltip?.remove()
+  controlButtonTooltip = undefined
+}
+
 const removeControlButton = () => {
   const button = parent.document.querySelector('.ylcf-control-button')
   button && button.remove()
+  removeControlButtonTooltip()
 }
 
 const addControlButton = () => {
@@ -56,6 +148,11 @@ const addControlButton = () => {
   button.setAttribute('data-tooltip-title', 'Flow messages')
   button.onclick = async () =>
     await chrome.runtime.sendMessage({ type: 'control-button-clicked' })
+  button.onblur = hideControlButtonTooltip
+  button.onfocus = () => showControlButtonTooltip(button)
+  button.onmouseenter = () => showControlButtonTooltip(button)
+  button.onmousemove = () => positionControlButtonTooltip(button)
+  button.onmouseleave = hideControlButtonTooltip
   button.innerHTML = chat
 
   // Match YouTube player button icon sizing.
